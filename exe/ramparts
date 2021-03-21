@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'ramparts/cli'
+Ramparts::CLI.start
