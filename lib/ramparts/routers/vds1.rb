@@ -17,10 +17,34 @@ class Ramparts::Routers::Vds1
     @repository = repository
   end
 
+  def normalize_host(host)
+    if host.name == 'any'
+      return nil
+    else
+      return host.address
+    end
+  end
+
+  def normalize_port(port)
+    if port.name == 'any'
+      return nil
+    else
+      return port.port
+    end
+  end
+
+  def normalize_service(service)
+    if service.name == 'any'
+      return [nil, nil]
+    else
+      return [service.port, service.protocol]
+    end
+  end
+
   def create_rules
-    # 自PortGroupのアドレスがdstであるルールを抽出する
 
     @repository.rules.each do |rule|
+      # 自PortGroupのアドレスがdstであるルールを抽出する
       @engine.portgroups.each do |portgroup|
         if rule.dst.name == 'any'
           dst = nil
@@ -31,23 +55,10 @@ class Ramparts::Routers::Vds1
             next
           end
         end
-        if rule.src.name == 'any'
-          src = nil
-        else
-          src = rule.src.address
-        end
-        if rule.srcport.name == 'any'
-          srcport = nil
-        else
-          srcport = rule.srcport.port
-        end
-        if rule.service.name == 'any'
-          dstport = nil
-          protocol = nil
-        else
-          dstport = rule.service.port
-          protocol = rule.service.protocol
-        end
+        src = normalize_host(rule.src)
+        srcport = normalize_port(rule.srcport)
+        dstport, protocol = normalize_service(rule.service)
+
         dcname = portgroup[:dcname]
         pgname = portgroup[:portgroupname]
         @engine.add_rule(dcname: dcname, pgname: pgname,
@@ -55,10 +66,8 @@ class Ramparts::Routers::Vds1
           src: src, dst: dst, srcport: srcport, dstport: dstport,
           protocol: protocol, action: rule[:action])
       end
-    end
-
-    # 自PortGroupのアドレスがsrcであるルールの戻りを抽出する
-    @repository.rules.each do |rule|
+    
+      # 自PortGroupのアドレスがsrcであるルールの戻りを抽出する
       @engine.portgroups.each do |portgroup|
         if rule.src.name == 'any'
           dst = nil
@@ -69,23 +78,10 @@ class Ramparts::Routers::Vds1
             next
           end
         end
-        if rule.dst.name == 'any'
-          src = nil
-        else
-          src = rule.dst.address
-        end
-        if rule.srcport.name == 'any'
-          dstport = nil
-        else
-          dstport = rule.srcport.port
-        end
-        if rule.service.name == 'any'
-          srcport = nil
-          protocol = nil
-        else
-          srcport = rule.service.port
-          protocol = rule.service.protocol
-        end
+        src = normalize_host(rule.dst)
+        dstport = normalize_port(rule.srcport)
+        srcport, protocol = normalize_service(rule.service)
+
         dcname = portgroup[:dcname]
         pgname = portgroup[:portgroupname]
         @engine.add_rule(dcname: dcname, pgname: pgname,
