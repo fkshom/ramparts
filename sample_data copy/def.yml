@@ -1,0 +1,35 @@
+host:
+  host11a: 192.168.11.11
+  host11b: 192.168.11.12
+  host12a: 192.168.12.11
+  host12b: 192.168.12.12
+  host21a: 192.168.21.11
+  host31a: 192.168.31.11
+  host31a: 192.168.31.12
+  network11: 192.168.11.0/24
+  network12: 192.168.12.0/24
+  network21: 192.168.21.0/24
+  network31: 192.168.31.0/24
+
+host_group:
+  hosts23: 
+  - host21
+  - host31
+
+port:
+  highport32768: 32768-65535
+
+service:
+  http: 80/tcp
+  https: 443/tcp
+  dnsudp: 53/udp
+  dnstcp: 53/tcp
+  rdptcp: 3389/tcp
+  rdpudp: 3389/udp
+  icmp: icmp
+  arp: arp
+
+service_group:
+  dns:
+  - dnsudp
+  - dnstcp

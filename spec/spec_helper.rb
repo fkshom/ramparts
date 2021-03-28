@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "super_diff/rspec"
+require 'rspec-parameterized'
 require "ramparts"
 
 RSpec.configure do |config|

@@ -1,0 +1,25 @@
+router1:
+- interfacename: irb001
+  filtername: irb001in
+  direction: in
+  address: 192.168.1.1/24
+- interfacename: irb002
+  filtername: irb002in
+  direction: in
+  address: 192.168.2.1/24
+router2:
+- interfacename: irb003
+  filtername: irb003in
+  direction: in
+  address: 192.168.3.1/24
+- interfacename: irb004
+  filtername: irb004in
+  direction: in
+  address: 192.168.4.1/24
+vds1:
+- dcname: dc01
+  pgname: pg01
+  address: 192.168.1.0/24
+- dcname: dc01
+  pgname: pg02
+  address: 192.168.2.0/24

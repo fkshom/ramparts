@@ -1,0 +1,7 @@
+target: all
+---
+src      , dst, srcport, service, action
+network11, any, any    , any    , accept
+network12, any, any    , any    , accept
+network21, any, any    , any    , accept
+network31, any, any    , any    , accept

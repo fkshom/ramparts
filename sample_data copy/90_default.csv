@@ -1,0 +1,4 @@
+taregt: all
+---
+src, dst, srcport, service, action
+any, any, any    , any    , drop  

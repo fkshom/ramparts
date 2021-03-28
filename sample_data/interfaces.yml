@@ -1,30 +1,29 @@
 router1:
-- interfacename: irb100
-  filtername: irb100in
+- interfacename: irb11
+  filtername: irb11in
   direction: in
-  address: 192.168.0.1/24
-- interfacename: irb110
-  filtername: irb110in
+  address: 192.168.11.1/24
+- interfacename: irb12
+  filtername: irb12in
   direction: in
-  address: 192.168.1.1/24
+  address: 192.168.12.1/24
 router2:
-- interfacename: irb200
-  filtername: irb200in
+- interfacename: irb21
+  filtername: irb21in
   direction: in
-  address: 192.168.2.1/24
-- interfacename: irb210
-  filtername: irb210in
+  address: 192.168.21.1/24
+router3:
+- interfacename: irb31
+  filtername: irb31in
   direction: in
-  address: 192.168.3.1/24
-vdstf1:
+  address: 192.168.31.1/24
+vds1:
 - dcname: dc01
-  pgname: pg01
-  address: 192.168.0.0/24
+  pgname: pg11
+  address: 192.168.11.0/24
 - dcname: dc01
-  pgname: pg02
-  address: 192.168.1.0/24
-router2:
-- interfacename: someif
-  filtername: ks
-  direction: in
-  address: 192.168.5.1/24
+  pgname: pg12
+  address: 192.168.12.0/24
+- dcname: dc01
+  pgname: pg21
+  address: 192.168.21.0/24

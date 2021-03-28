@@ -29,12 +29,15 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor"
+  spec.add_dependency "activesupport"
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "guard-rspec"
   spec.add_development_dependency "solargraph"
   spec.add_development_dependency "super_diff"
+  spec.add_development_dependency "rspec-parameterized"
+  
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
