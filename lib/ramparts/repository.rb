@@ -204,7 +204,7 @@ class Ramparts::Repository
     )
   end
 
-  def parse_ruledata(arr)
+  def parse_segment(arr)
     result = {}
     sep_index = arr.find_index{|line| line =~ %r{----*}}
     if sep_index
@@ -229,13 +229,24 @@ class Ramparts::Repository
     result[:ruledata] = ruledata
     result
   end
+  
+  def parse_ruledata(arr)
+    segments = []
+    arr.chunk{|line| line =~ %r{====*} ? :segment_sep : :data}.reject{|key, segment| key == :segment_sep}
+       .each{|_, segment|
+        segments << parse_segment(segment)
+       }
+    segments
+  end
 
   def load_ruledata(io)
     tmp = io.readlines
-    data = parse_ruledata(tmp)
-    csv = data[:ruledata].map{|line| line.split(',').map(&:strip) }
-    csv[1..-1].each{|row|
-      add_rule( **LABELS.zip(row).to_h , target: data[:target])
+    segments = parse_ruledata(tmp)
+    segments.each{|data|
+      csv = data[:ruledata].map{|line| line.split(',').map(&:strip) }
+      csv[1..-1].each{|row|
+        add_rule( **LABELS.zip(row).to_h , target: data[:target])
+      }
     }
   end
 
