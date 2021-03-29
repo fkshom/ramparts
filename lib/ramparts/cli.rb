@@ -43,6 +43,14 @@ module Ramparts
       rules = router.create_rules()
       pp rules.class
       pp rules.to_h
+
+      router = Ramparts::Routers::Vds1a.new(repository, name='vds1')
+      (l_interfaces['vds1'] || []).each do |interface|
+        router.assign_portgroup(dcname: interface['dcname'], portgroupname: interface['pgname'],
+          address: interface['address'])
+      end
+      rules = router.create_rules()
+      pp rules.to_h
     end
   end
 end
