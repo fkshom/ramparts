@@ -275,7 +275,7 @@ class Ramparts::Repository
   
   def load_dir(dirpath)
     # host, port, service
-    load_some('sample_data/def.yml')
+    load_some("#{dirpath}/def.yml")
 
     # rule
     Dir.glob("#{dirpath}/*.csv"){|filename|

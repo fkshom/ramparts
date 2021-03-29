@@ -18,7 +18,7 @@ module Ramparts
     desc "generate", "do generate"
     def generate()
       repository = Ramparts::Repository.new()
-      repository.load_dir('sample_data')
+      repository.load_dir('sample_data2')
 
       l_interfaces = YAML.load_file("sample_data/interfaces.yml")
       router = Ramparts::Routers::Router1.new(repository)

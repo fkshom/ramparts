@@ -1,0 +1,28 @@
+target: all
+---
+src      , dst, srcport, service, action
+network11, any, any    , any    , accept
+network12, any, any    , any    , accept
+network21, any, any    , any    , accept
+network31, any, any    , any    , accept
+================================================
+target: all
+---
+src      , dst      , srcport, service, action
+network11, network31, any    , rdptcp , drop  
+================================================
+target: vds.*
+---
+src      , dst      , srcport, service, action
+network11, network11, any    , any    , accept
+network12, network12, any    , any    , accept
+================================================
+target: all
+---
+src    , dst    , srcport      , service, action
+host11a, host21a, highport32768, http   , accept
+================================================
+target: all
+---
+src, dst, srcport, service, action
+any, any, any    , any    , drop  

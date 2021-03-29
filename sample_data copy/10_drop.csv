@@ -1,4 +1,0 @@
-taregt: all
----
-src    , dst       , srcport      , service, action
-network11, network31, any, rdptcp  , drop  

@@ -1,4 +1,0 @@
-taregt: all
----
-src   , dst   , srcport      , service, action
-host11a, host21a, highport32768, http   , accept

@@ -1,5 +1,0 @@
-taregt: vds.*
----
-src      , dst, srcport, service, action
-network11, network11, any    , any    , accept
-network12, network12, any    , any    , accept
