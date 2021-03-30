@@ -96,6 +96,23 @@ class Ramparts::Repository
     end
   end
 
+  class FiveTuple
+    attr_reader :src, :dst, :srcport, :dstport, :protocol, :action, :target
+    def initialize(src: nil, dst: nil, srcport: nil, dstport: nil, protocol: nil, action: nil, target: nil)
+      @src = src
+      @dst = dst
+      @srcport = srcport
+      @dstport = dstport
+      @protocol = protocol
+      @action = action
+      @target = target
+    end
+
+    def reverse
+      FiveTuple(src: @dst, dst: @src, srcport: @dstport, dstport: @srcport, protocol: @protocol)
+    end
+  end
+
   class Rule
     attr_reader :src, :dst, :srcport, :service, :action, :target
 
@@ -128,6 +145,16 @@ class Ramparts::Repository
         service: @service,
         action: @action,
       })
+    end
+
+    def to_5tuple
+      return FiveTuple(
+        src: @src.address,
+        dst: @dst.address,
+        srcport: @srcport.port,
+        dstport: @service.port,
+        protocol: @service.protocol,
+      )
     end
   end
   

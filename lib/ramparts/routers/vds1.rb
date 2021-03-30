@@ -95,7 +95,7 @@ class Ramparts::Routers::Vds1
 end
 
 
-class Ramparts::Routers::Vds1a
+class Ramparts::Routers::Vds
   # ビジネスロジックを含むクラス
   # リポジトリとfilter 定義をつなぐ役割を持つ
   # 次のルールを利用する
@@ -106,7 +106,7 @@ class Ramparts::Routers::Vds1a
   extend Forwardable
   def_delegators :@engine, :assign_portgroup, :add_rule
   
-  def initialize(repository, name:)
+  def initialize(repository)
     @engine = Ramparts::Routers::Base::Vds.new
     @repository = repository
     @name = name

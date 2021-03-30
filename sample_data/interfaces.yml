@@ -17,13 +17,16 @@ router3:
   filtername: irb31in
   direction: in
   address: 192.168.31.1/24
-vds1:
+vds:
 - dcname: dc01
   pgname: pg11
+  rule_creation_type: normal
   address: 192.168.11.0/24
 - dcname: dc01
   pgname: pg12
+  rule_creation_type: normal
   address: 192.168.12.0/24
 - dcname: dc01
   pgname: pg21
+  rule_creation_type: normal
   address: 192.168.21.0/24

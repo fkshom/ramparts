@@ -17,21 +17,21 @@ module Ramparts
 
     desc "generate", "do generate"
     def generate()
-      repository = Ramparts::Repository.new()
-      repository.load_dir('sample_data2')
+      # repository = Ramparts::Repository.new()
+      # repository.load_dir('sample_data2')
 
-      l_interfaces = YAML.load_file("sample_data/interfaces.yml")
-      router = Ramparts::Routers::Router1.new(repository)
+      # l_interfaces = YAML.load_file("sample_data/interfaces.yml")
+      # router = Ramparts::Routers::Router1.new(repository)
 
-      (l_interfaces['router1'] || []).each do |interface|
-        router.assign_interface(interfacename: interface['interfacename'], filtername: interface['filtername'],
-          direction: interface['direction'], address: interface['address'])
-      end
+      # (l_interfaces['router1'] || []).each do |interface|
+      #   router.assign_interface(interfacename: interface['interfacename'], filtername: interface['filtername'],
+      #     direction: interface['direction'], address: interface['address'])
+      # end
 
-      rules = router.create_rules()
-      pp rules.class  # Ramprts::Routers::Base::Junos::Rules
-      pp rules.to_h
-      puts rules.to_s
+      # rules = router.create_rules()
+      # pp rules.class  # Ramprts::Routers::Base::Junos::Rules
+      # pp rules.to_h
+      # puts rules.to_s
 
       router = Ramparts::Routers::Vds1.new(repository)
 
@@ -44,9 +44,12 @@ module Ramparts
       pp rules.class
       pp rules.to_h
 
-      router = Ramparts::Routers::Vds1a.new(repository, name='vds1')
-      (l_interfaces['vds1'] || []).each do |interface|
-        router.assign_portgroup(dcname: interface['dcname'], portgroupname: interface['pgname'],
+      router = Ramparts::Routers::Vds.new(repository)
+      (l_interfaces['vds'] || []).each do |interface|
+        router.assign_portgroup(
+          dcname: interface['dcname'],
+          portgroupname: interface['pgname'],
+          rule_creation_type: interface['rule_creation_type'],
           address: interface['address'])
       end
       rules = router.create_rules()
